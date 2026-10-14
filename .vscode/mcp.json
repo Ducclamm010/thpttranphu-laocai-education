@@ -1,0 +1,116 @@
+{
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "supabase-token",
+      "description": "Nhập mã Supabase MCP (sbp_...)",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "vercel-token",
+      "description": "Nhập mã Vercel Token (vcp_...)",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "github-token",
+      "description": "Nhập mã GitHub PAT (github_pat_...)",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "stitch-token",
+      "description": "Nhập mã Stitch API Key (AQ...)",
+      "password": true
+    }
+  ],
+  "servers": {
+    "supabase": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp?project_ref=vzjiupcajtmmiynyzaqp&features=docs%2Caccount%2Cdatabase%2Cdebugging%2Cdevelopment%2Cfunctions%2Cbranching",
+      "headers": {
+        "Authorization": "Bearer ${input:supabase-token}"
+      }
+    },
+    "vercel": {
+      "type": "http",
+      "url": "https://mcp.vercel.com",
+      "headers": {
+        "Authorization": "Bearer ${input:vercel-token}"
+      }
+    },
+    "github": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${input:github-token}"
+      }
+    },
+    "stitch": {
+      "type": "http",
+      "url": "https://stitch.googleapis.com/mcp",
+      "headers": {
+        "X-Goog-Api-Key": "${input:stitch-token}"
+      }
+    },
+    "puppeteer": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ]
+    },
+    "duckduckgo": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "duckduckgo-mcp-server"
+      ]
+    },
+    "memory": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
+    },
+    "google-drive": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-gdrive"
+      ],
+      "env": {
+        "GDRIVE_OAUTH_PATH": "C:/Users/ienyh/Documents/Nodejs/thpttranphu-laocai-education/gcp-oauth.keys.json",
+        "GDRIVE_CREDENTIALS_PATH": "C:/Users/ienyh/Documents/Nodejs/thpttranphu-laocai-education/.vscode/gdrive-token.json"
+      }
+    },
+    "obsidian": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-obsidian",
+        "C:/Users/ienyh/Documents/Nodejs/thpttranphu-laocai-education/.docs/obsidian/"
+      ]
+    },
+    "project-skills": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:/Users/ienyh/Documents/Nodejs/thpttranphu-laocai-education/.docs",
+        "C:/Users/ienyh/Documents/Nodejs/thpttranphu-laocai-education/.agents"
+      ]
+    }
+  }
+}
