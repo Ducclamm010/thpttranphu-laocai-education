@@ -44,3 +44,5 @@ gcp-oauth.keys.json
 /.vscode/gdrive-token.json
 
 /.docs
+
+/.agents

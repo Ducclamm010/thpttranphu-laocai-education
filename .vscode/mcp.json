@@ -111,6 +111,26 @@
         "C:/Users/ienyh/Documents/Nodejs/thpttranphu-laocai-education/.docs",
         "C:/Users/ienyh/Documents/Nodejs/thpttranphu-laocai-education/.agents"
       ]
+    },
+    "postgres": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://postgres:89te2%3Fzu-F85f5e@db.vzjiupcajtmmiynyzaqp.supabase.co:5432/postgres?pgbouncer=true"
+      ]
+    },
+    "google-sheets": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-gsheets@latest"
+      ],
+      "env": {
+        "GOOGLE_PROJECT_ID": "tranphu",
+        "GOOGLE_APPLICATION_CREDENTIALS": "C:/Users/ienyh/Documents/Nodejs/thpttranphu-laocai-education/gcp-oauth.keys.json"
+      }
     }
   }
 }
