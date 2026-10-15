@@ -46,3 +46,5 @@ gcp-oauth.keys.json
 /.docs
 
 /.agents
+
+/.gemini
