@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Link from 'next/link'
 import { Outfit, Be_Vietnam_Pro, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -113,12 +114,12 @@ export default function RootLayout({
           >
             {/* Vùng Trái (Left Zone): Thương hiệu, Bật/tắt âm thanh (Opt-in), Đổi giao diện */}
             <div className="flex items-center gap-2">
-              <a
+              <Link
                 href="/"
                 className="font-heading font-bold text-lg px-3 py-1.5 rounded-full text-[var(--brand-primary)] hover:text-[var(--brand-hover)] transition-colors"
               >
                 OceanSchool
-              </a>
+              </Link>
 
               <div className="h-4 w-[1px] bg-slate-400/25 mx-1" aria-hidden="true" />
 
