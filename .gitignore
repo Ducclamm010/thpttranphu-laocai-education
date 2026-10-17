@@ -48,3 +48,5 @@ gcp-oauth.keys.json
 /.agents
 
 /.gemini
+
+/.token-optimizer
