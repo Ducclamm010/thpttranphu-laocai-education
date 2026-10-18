@@ -1,26 +1,169 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   1. DESIGN TOKENS (ALL-LIGHT THEME - NO BLUR)
+   ========================================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Surfaces & Canvas */
+  --surface-base: #FAF8F5;
+  --surface-elevated: #FFFFFF;
+  --surface-glass: #FFFFFF; /* Không dùng trong suốt/blur, dùng nền trắng sạch */
+
+  /* Brand (Ocean Blue) */
+  --brand-primary: #0284C7;
+  --brand-hover: #0369A1;
+
+  /* Actions & Accents */
+  --action-primary: #E85D3F; /* Sunset Coral */
+  --action-soft: #FFF0ED;
+  --accent-focus: #D97706;
+  --accent-success: #059669;
+  --accent-danger: #DC2626;
+
+  /* Typography & Borders */
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --border-subtle: #E2E8F0;
+
+  /* Elevation & Borders (Flat / Sharp Performance) */
+  --flat-border: 1px solid var(--border-subtle);
+  --flat-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+
+  /* Layout & Motion */
+  --radius-card: 16px;
+  --radius-pill: 9999px;
+  --spring-transition: transform 0.2s ease;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ==========================================================================
+   2. BASE & TYPOGRAPHY
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+  font-family: var(--font-body), 'Be Vietnam Pro', sans-serif;
+  font-size: clamp(0.95rem, 0.9rem + 0.25vw, 1.1rem);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  position: relative;
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-heading {
+  font-family: var(--font-heading), Outfit, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--text-primary);
+}
+
+code, pre, kbd, samp,
+.font-mono {
+  font-family: var(--font-mono), 'JetBrains Mono', monospace;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-focus);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   3. CLEAN SURFACES & CARDS (NO BLUR / NO BACKDROP-FILTER)
+   ========================================================================== */
+.glass-surface {
+  background: var(--surface-elevated);
+  border: var(--flat-border);
+  box-shadow: var(--flat-shadow);
+}
+
+.glass-card {
+  background: var(--surface-elevated);
+  border: var(--flat-border);
+  box-shadow: var(--flat-shadow);
+  border-radius: var(--radius-card);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+/* ==========================================================================
+   4. INTERACTIVE CONTROLS & BUTTONS
+   ========================================================================== */
+.spring-interactive {
+  transition: transform 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.spring-interactive:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn-action-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.625rem 1.25rem;
+  border-radius: 14px;
+  border: none;
+  background-color: var(--action-primary);
+  color: #FFFFFF;
+  font-family: var(--font-heading), sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.btn-action-primary:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+.btn-action-primary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn-action-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   5. ACCESSIBILITY & REDUCED MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
